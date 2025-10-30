@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="jft.ToDoXamarinForm.Views.Itens_AtividadesItemPage"
+             Title="{Binding Title}">
+    
+    
+    
+    
+    <ContentPage.Content>
+        <StackLayout Margin="20"
+                 VerticalOptions="StartAndExpand">
+
+            <Label  TextColor="Black" Text="Atividade" />
+            <Entry  TextChanged="id_atividade_TextChanged" TextColor="Black" Text="{Binding id_atividade}" />
+
+            
+            <Label  TextColor="Black" Text="Grupo" />
+            <Entry x:Name="id_grupo_atividade" 
+                       TextChanged="id_grupo_atividade_TextChanged"  
+                       TextColor="Black" 
+                       Text="{Binding id_grupo_atividade}" />
+            <Label  x:Name="nm_grupo_atividade" 
+                        Text=""
+                        TextColor="Black" 
+                        FontAttributes="Bold"
+                        HorizontalOptions="Start" />
+            
+            
+
+            <Label  TextColor="Black" Text="Ordem" />
+            <Entry  x:Name="nr_ordem_item_atividade"  
+                    TextColor="Black" Text="{Binding nr_ordem_item_atividade}" />
+
+            <Label  TextColor="Black" Text="Nome" />
+            <Entry  x:Name="nm_item_atividade"  TextColor="Black" Text="{Binding nm_item_atividade}" />
+
+            <Label  TextColor="Black" Text="Data" />
+            <DatePicker x:Name="datePicker" 
+                         TextColor="Black" 
+                        Date="{Binding dt_item_atividade}" 
+                Format="dd/MM/yyyy"   />
+            
+            
+            <!--<Entry TextColor="Black" Text="{Binding dt_item_atividade}" />-->
+
+            <Label  TextColor="Black" Text="Concluído?" />
+            <Switch  IsToggled="{Binding bo_concluido}" />
+
+
+            <Label  TextColor="Black" Text="Descrição" FontSize="Medium" />
+            <Editor  x:Name="te_descricao"  TextColor="Black" Text="{Binding te_descricao, Mode=TwoWay}" AutoSize="TextChanges" FontSize="Medium" Margin="0" />
+
+
+
+            <StackLayout Orientation="Horizontal">
+                <Button Text="Save"  HorizontalOptions="FillAndExpand"
+                Clicked="OnSaveClicked" />
+                <Button Text="Delete"  HorizontalOptions="FillAndExpand"
+                Clicked="OnDeleteClicked" />
+                <Button Text="Cancel"  HorizontalOptions="FillAndExpand"
+                Clicked="OnCancelClicked" />
+            </StackLayout>
+
+        </StackLayout>
+
+
+
+        <!--<StackLayout Spacing="3" Padding="15">
+            <Label Text="Text" FontSize="Medium" />
+            <Entry Text="{Binding Text, Mode=TwoWay}" FontSize="Medium" />
+            <Label Text="Description" FontSize="Medium" />
+            <Editor Text="{Binding Description, Mode=TwoWay}" AutoSize="TextChanges" FontSize="Medium" Margin="0" />
+            <StackLayout Orientation="Horizontal">
+                <Button Text="Cancel" Command="{Binding CancelCommand}" HorizontalOptions="FillAndExpand"></Button>
+                <Button Text="Save" Command="{Binding SaveCommand}" HorizontalOptions="FillAndExpand"></Button>
+            </StackLayout>
+        </StackLayout>-->
+    </ContentPage.Content>
+</ContentPage>

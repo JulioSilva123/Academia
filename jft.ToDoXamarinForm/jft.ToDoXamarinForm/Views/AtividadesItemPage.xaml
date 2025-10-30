@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="jft.ToDoXamarinForm.Views.AtividadesItemPage"
+             Title="{Binding Title}">
+   
+
+    <Grid VerticalOptions="FillAndExpand">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        
+
+        <Image Source="overlay.png" Aspect="Fill" HeightRequest="150" 
+               VerticalOptions="StartAndExpand"/>
+
+        <!--<StackLayout Orientation="Horizontal" Spacing="20" HorizontalOptions="Start" 
+                     VerticalOptions="Start" Margin="20,50">
+            <ImageButton Source="menu.png" WidthRequest="23" HeightRequest="15" 
+                         HorizontalOptions="Start" VerticalOptions="Center" />
+            <Label Text="LONDON, GB" FontSize="14" VerticalOptions="Center" TextColor="White"/>
+        </StackLayout>-->
+
+        <StackLayout Orientation="Vertical" Margin="0,20" HorizontalOptions="Center" 
+                     VerticalOptions="Center">
+
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                <!--<Image Source="weather.png" WidthRequest="40" HeightRequest="40" 
+                       VerticalOptions="Center"/>-->
+                <Label Text="Atividades" TextColor="White" FontSize="60" FontAttributes="Bold" 
+                       VerticalOptions="Center"/>
+                <!--<Label Text="°C" TextColor="White" FontSize="24" VerticalOptions="Center"/>-->
+            </StackLayout>
+
+            <!--<Label Text="Chuva de fraca intensidade" TextColor="White" FontSize="14" 
+                   HorizontalOptions="Center"/>
+            <Label Text="June 15, 09:03 AM" TextColor="White" FontSize="12" 
+                   HorizontalOptions="Center"/>-->
+
+        </StackLayout>
+
+
+        <Frame Grid.Row="1" HasShadow="True" CornerRadius="10" Margin="20,-40,20,0" Padding="0"  VerticalOptions="Start">
+            <StackLayout   Margin="20"
+                 VerticalOptions="StartAndExpand">
+
+                <!--<Label  TextColor="Black" Text="Grupo" />
+                <Entry x:Name="id_grupo_atividade" 
+                       TextChanged="id_grupo_atividade_TextChanged"  
+                       TextColor="Black" 
+                       Text="{Binding id_grupo_atividade}" />
+                
+                
+
+                <Label  x:Name="nm_grupo_atividade" 
+                        Text=""
+                        TextColor="Black" 
+                        FontAttributes="Bold"
+                        HorizontalOptions="Start" />-->
+                
+                <!--
+                <Label Text="Grupo" TextColor="Black"  
+                FontAttributes="Bold" 
+                HorizontalOptions="Center" />
+                <Picker x:Name="id_grupo_atividade"  
+                        Title="Selecione o Grupo" 
+                        ItemsSource="{Binding CountryList}" 
+                        SelectedItem="{Binding SelectedColorName, Mode=TwoWay}" />-->
+
+
+
+
+
+
+                <Label  TextColor="Black" Text="Tipo" />
+                <Entry  x:Name="id_tipo_atividade" 
+                       TextChanged="id_tipo_atividade_TextChanged" 
+                        TextColor="Black" Text="{Binding id_tipo_atividade}" />
+
+                <Label  x:Name="nm_tipo_atividade" 
+                        Text=""
+                        TextColor="Black" 
+                        FontAttributes="Bold"
+                        HorizontalOptions="Start" />
+
+
+                <!--<Label TextColor="Black" Text="Ordem" />
+                <Entry x:Name="nr_ordem_atividade"  TextColor="Black" Text="{Binding nr_ordem_atividade}" />-->
+                
+                
+                
+                
+                <Label  TextColor="Black" Text="Nome" />
+                <Entry TextColor="Black" Text="{Binding nm_atividade}" />
+                
+                 
+
+                <Label  TextColor="Black" Text="Descrição" FontSize="Medium" />
+                <Editor  TextColor="Black" 
+                         Text="{Binding te_descricao, Mode=TwoWay}" 
+                         AutoSize="TextChanges" 
+                         FontSize="Medium" Margin="0" />
+
+                
+   
+
+            </StackLayout>
+        </Frame>
+
+
+        <Frame Grid.Row="2" HasShadow="True" CornerRadius="10" Margin="20,-40,20,0" Padding="0"  VerticalOptions="Start">
+            <StackLayout   Margin="20"
+                 VerticalOptions="StartAndExpand">
+
+
+                <StackLayout Orientation="Horizontal">
+                    <Button Text="Save"  HorizontalOptions="FillAndExpand"
+                Clicked="OnSaveClicked" />
+                    <Button Text="Delete"  HorizontalOptions="FillAndExpand"
+                Clicked="OnDeleteClicked" />
+                    <Button Text="Cancel"  HorizontalOptions="FillAndExpand"
+                Clicked="OnCancelClicked" />
+                </StackLayout>
+
+            </StackLayout>
+        </Frame>
+
+
+        <StackLayout Grid.Row="3" BackgroundColor="Transparent" Orientation="Horizontal" Margin="20" HorizontalOptions="End">
+            <ImageButton x:Name="ListBtn" Source="listColor.png" WidthRequest="15" HeightRequest="15" />
+            <ImageButton x:Name="GridBtn" Source="grid.png" WidthRequest="15" HeightRequest="15"/>
+        </StackLayout>
+        
+        
+        
+    </Grid>
+
+    <!--<StackLayout Spacing="3" Padding="15">
+            <Label Text="Text" FontSize="Medium" />
+            <Entry Text="{Binding Text, Mode=TwoWay}" FontSize="Medium" />
+            <Label Text="Description" FontSize="Medium" />
+            <Editor Text="{Binding Description, Mode=TwoWay}" AutoSize="TextChanges" FontSize="Medium" Margin="0" />
+            <StackLayout Orientation="Horizontal">
+                <Button Text="Cancel" Command="{Binding CancelCommand}" HorizontalOptions="FillAndExpand"></Button>
+                <Button Text="Save" Command="{Binding SaveCommand}" HorizontalOptions="FillAndExpand"></Button>
+            </StackLayout>
+        </StackLayout>-->
+    
+
+</ContentPage>

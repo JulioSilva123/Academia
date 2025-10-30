@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             Title="{Binding Title}"
+             xmlns:local="clr-namespace:jft.ToDoXamarinForm.ViewModels"  
+             xmlns:model="clr-namespace:jft.ToDoXamarinForm.Models"  
+             x:Class="jft.ToDoXamarinForm.Views.GruposAtividadesListPage">
+    <!--<d:ContentPage.Content>
+        <StackLayout>
+            <Label Text="Welcome to Xamarin.Forms!"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+        </StackLayout>
+    </d:ContentPage.Content>-->
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Add" Clicked="OnItemAdded">
+            <!--<ToolbarItem.IconImageSource>
+                <OnPlatform x:TypeArguments="ImageSource">
+                    <On Platform="Android, UWP"
+                        Value="plus.png" />
+                </OnPlatform>
+            </ToolbarItem.IconImageSource>-->
+        </ToolbarItem>
+        <!--<ToolbarItem Text="+" Clicked="OnGrupoItemAdded">
+            <ToolbarItem.IconImageSource>
+                <OnPlatform x:TypeArguments="ImageSource">
+                    <On Platform="Android, UWP"
+                        Value="plus.png" />
+                </OnPlatform>
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>-->
+    </ContentPage.ToolbarItems>
+
+    <ListView x:Name="listView"
+              Margin="20"
+              ItemSelected="OnListItemSelected">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <StackLayout Margin="20,0,0,0"
+                                 Orientation="Horizontal"
+                                 HorizontalOptions="FillAndExpand">
+                        <Label Text="{Binding nm_grupo_atividade}"
+                               VerticalTextAlignment="Center"
+                               HorizontalOptions="StartAndExpand" 
+                               LineBreakMode="NoWrap" 
+                                Style="{DynamicResource ListItemTextStyle}" 
+                               TextColor="Black"
+                                FontSize="16"/>
+                        <!--<StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer 
+                                NumberOfTapsRequired="1"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type local:GruposAtividadesListPageViewModel}}, Path=ItemTapped}"		
+                                CommandParameter="{Binding .}">
+                            </TapGestureRecognizer>
+                        </StackLayout.GestureRecognizers>-->
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+
+</ContentPage>

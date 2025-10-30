@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="jft.ToDoXamarinForm.Views.Itens_AtividadesListPage"
+             Title="{Binding Title}">
+
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Add" Clicked="OnItemAdded">
+            <!--<ToolbarItem.IconImageSource>
+                <OnPlatform x:TypeArguments="ImageSource">
+                    <On Platform="Android, UWP"
+                        Value="plus.png" />
+                </OnPlatform>
+            </ToolbarItem.IconImageSource>-->
+        </ToolbarItem>
+        <!--<ToolbarItem Text="+" Clicked="OnGrupoItemAdded">
+            <ToolbarItem.IconImageSource>
+                <OnPlatform x:TypeArguments="ImageSource">
+                    <On Platform="Android, UWP"
+                        Value="plus.png" />
+                </OnPlatform>
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>-->
+    </ContentPage.ToolbarItems>
+
+
+    <StackLayout  >
+        
+        
+        <SearchBar x:Name="CountriesSearchBar"  
+             TextChanged="Handle_SearchButtonPressed" />
+       
+        
+        
+        
+        <Grid  Padding="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Label Text="Tipo" TextColor="Black" FontAttributes="Bold" Grid.Column="0" />
+            <Label Text="Data" TextColor="Black" FontAttributes="Bold" Grid.Column="1" />
+            <Label Text="OK?" TextColor="Black" FontAttributes="Bold" Grid.Column="2" />
+        </Grid>
+
+        <ListView x:Name="listView"
+              Margin="10"
+              ItemSelected="OnListItemSelected">
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+
+                        <Grid  Padding="5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*"   />
+                            </Grid.ColumnDefinitions>
+
+
+                            <Label Grid.Column="0" Text="{Binding nm_item_atividade}"
+                               VerticalTextAlignment="Center"
+                               HorizontalOptions="StartAndExpand" 
+                               LineBreakMode="WordWrap" 
+                                Style="{DynamicResource ListItemTextStyle}" 
+                               TextColor="Black"
+                                FontSize="16"/>
+
+                            <Label Grid.Column="1" Text="{Binding dt_item_atividade, StringFormat='{0:dd/MM/yyyy}'}"
+                               VerticalTextAlignment="Center"
+                               HorizontalOptions="StartAndExpand" 
+                               LineBreakMode="WordWrap"  
+                                Style="{DynamicResource ListItemTextStyle}" 
+                               TextColor="Black"
+                                FontSize="16"/>
+
+
+                            <Image  Grid.Column="2" 
+                                    Source="check.png"
+                               HorizontalOptions="Center"
+                               IsVisible="{Binding bo_concluido}" />
+
+                        </Grid>
+
+
+                    </ViewCell>
+
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+
+
+
+</ContentPage>

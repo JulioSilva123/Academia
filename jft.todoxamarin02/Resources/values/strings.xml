@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">jft.todoxamarin02</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_nav_home">Home</string>
+    <string name="title_nav_camera">Camera</string>
+    <string name="title_nav_gallery">nav_gallery</string>
+    <string name="title_nav_slideshow">nav_slideshow</string>
+    <string name="title_nav_manage">nav_manage</string>
+    <string name="title_nav_share">nav_share</string>
+    <string name="title_nav_send">nav_send</string>
+</resources>
