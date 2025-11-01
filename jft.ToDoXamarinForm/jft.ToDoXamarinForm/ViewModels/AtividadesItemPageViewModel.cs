@@ -4,10 +4,15 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
+using Xamarin.Forms;
 
 namespace jft.ToDoXamarinForm.ViewModels
 {
-    public class AtividadesItemPageViewModel : BaseViewModel<Atividades>
+
+
+
+    [QueryProperty(nameof(ItemId), nameof(ItemId))]
+    public class AtividadesItemPageViewModel : BaseItemViewModel<Atividades, AtividadesView>
     {
 
         public AtividadesItemPageViewModel()
@@ -16,14 +21,7 @@ namespace jft.ToDoXamarinForm.ViewModels
 
             this.nr_ordem_atividade = 1;
             this.id_grupo_atividade = 0;
-
-
-            //Items = new ObservableCollection<Item>();
-            //LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
-
-            //ItemTapped = new Command<Item>(OnItemSelected);
-
-            //AddItemCommand = new Command(OnAddItem);
+             
         }
 
 
@@ -36,16 +34,37 @@ namespace jft.ToDoXamarinForm.ViewModels
         public int id_atividade {
             get
             {
+
+                if (this.ItemId != null)
+                {
+                    _id_atividade = int.Parse(this.ItemId);
+                }
+
                 return _id_atividade;
+
             }
             set
             {
                 _id_atividade = value;
-                this.LoadItemId(value);
+
+                if (this.ItemId == null)
+                {
+                    this.ItemId = _id_atividade.ToString();
+                }
+
+
+               // this.LoadItemId(value.ToString());
             }
         }
 
-        public int id_tipo_atividade { get; set; }
+        private int _id_tipo_atividade;
+        public int id_tipo_atividade
+        {
+            get => _id_tipo_atividade;
+            set => SetProperty(ref _id_tipo_atividade, value);
+        }
+
+
 
         public int id_grupo_atividade { get; set; }
 
@@ -58,7 +77,15 @@ namespace jft.ToDoXamarinForm.ViewModels
             set => SetProperty(ref _nm_atividade, value);
         }
 
-        public string te_descricao { get; set; }
+
+
+        private string _te_descricao;
+
+        public string te_descricao
+        {
+            get => _te_descricao;
+            set => SetProperty(ref _te_descricao, value);
+        }
 
 
 
@@ -67,18 +94,17 @@ namespace jft.ToDoXamarinForm.ViewModels
 
 
 
-
-
-        public async void LoadItemId(int itemId)
+        public  async override void LoadItemId(string _id)
         {
             try
             {
-                var item = await DataStore.GetItemAsync(itemId);
+                var item = await DataStore.GetItemAsync(int.Parse(_id));
 
                 this._id_atividade = item.id_atividade;
                 this.id_tipo_atividade = item.id_tipo_atividade;
                 this.id_grupo_atividade = item.id_grupo_atividade;
-                this._nm_atividade = item.nm_atividade;
+                this.nm_atividade = item.nm_atividade;
+                this.te_descricao  = item.te_descricao;
                 this.nr_ordem_atividade = item.nr_ordem_atividade;
 
                 //Description = item.Description;
@@ -89,5 +115,6 @@ namespace jft.ToDoXamarinForm.ViewModels
             }
         }
 
+       
     }
 }

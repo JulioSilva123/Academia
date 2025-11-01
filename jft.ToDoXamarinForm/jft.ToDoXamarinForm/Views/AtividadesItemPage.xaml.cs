@@ -163,18 +163,37 @@ namespace jft.ToDoXamarinForm.Views
 
 
         async void OnSaveClicked(object sender, EventArgs e)
-        {
-            var todoItem = (Atividades)BindingContext;
-             AtividadesService database = await  AtividadesService.Instance;
-            await database.SaveItemAsync(todoItem);
+        { 
+            var pageItem = (AtividadesItemPageViewModel)BindingContext;
+
+            
+
+
+            var _database = new AtividadesViewService();
+
+             
+            AtividadesView todoItem = await _database.GetItemViewAsync(pageItem.id_atividade);
+
+            todoItem.nr_ordem_atividade = pageItem.nr_ordem_atividade;
+            todoItem.GruposAtividades.id_grupo_atividade = pageItem.id_grupo_atividade;
+            todoItem.TiposAtividades.id_tipo_atividade = pageItem.id_tipo_atividade;
+            todoItem.id_atividade = pageItem.id_atividade;
+            todoItem.nm_atividade = pageItem.nm_atividade;
+            todoItem.te_descricao = pageItem.te_descricao;
+
+            await _database.SaveItemViewAsync(todoItem);
             await Navigation.PopAsync();
+              
         }
 
         async void OnDeleteClicked(object sender, EventArgs e)
         {
-            var todoItem = (Atividades)BindingContext;
-             AtividadesService database = await  AtividadesService.Instance;
-            await database.DeleteItemAsync(todoItem);
+           
+
+            var todoItem = (AtividadesItemPageViewModel)BindingContext;
+            var _database = new AtividadesViewService();
+             
+            await _database.DeleteItemViewAsync(todoItem.id_atividade.ToString());
             await Navigation.PopAsync();
         }
 

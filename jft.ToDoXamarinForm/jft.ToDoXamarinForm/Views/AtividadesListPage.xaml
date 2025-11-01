@@ -1,7 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
              Title="{Binding Title}"
+             xmlns:local="clr-namespace:jft.ToDoXamarinForm.ViewModels"
+             xmlns:model="clr-namespace:jft.ToDoXamarinForm.Models"
              x:Class="jft.ToDoXamarinForm.Views.AtividadesListPage">
 
 
@@ -25,112 +30,105 @@
     </ContentPage.ToolbarItems>
     
     
+    
+    
+    
+    
     <StackLayout  >
-         
-        <Grid  Padding="5">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*" />
-                <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="5*" />
-                <!--<ColumnDefinition Width="1*" />-->
-            </Grid.ColumnDefinitions>
-            <Label Text="Cod." TextColor="Black" FontAttributes="Bold" Grid.Column="0" />
-            <Label Text="Tipo"  TextColor="Black" FontAttributes="Bold" Grid.Column="1" />
-            <!--<Label Text="Ordem"  TextColor="Black" FontAttributes="Bold" Grid.Column="2" />-->
-            <Label Text="Nome"  TextColor="Black" FontAttributes="Bold" Grid.Column="2" />
-            <!--<Label Text="*"  TextColor="Black" FontAttributes="Bold" Grid.Column="3" />-->
+
+        <RefreshView x:DataType="local:AtividadesListPageViewModel" 
+                     Command="{Binding LoadItemsCommand}" 
+                     IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+
+
+            <!--<Grid ColumnDefinitions="*,*,*">
+                <Label Text="Column 1" FontAttributes="Bold" />
+                <Label Text="Column 2" FontAttributes="Bold" />
+            </Grid>-->
+
              
-        </Grid>
-
-        <ListView x:Name="listView"
-              Margin="20"
-              ItemSelected="OnListItemSelected">
-        
-        <ListView.ItemTemplate>
-            <DataTemplate>
-                <ViewCell>
-
-                    <Grid  Padding="5">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="2*" />
-                            <ColumnDefinition Width="1*" />
-                                <ColumnDefinition Width="5*" />
-                                <ColumnDefinition Width="1*" />
-                            </Grid.ColumnDefinitions>
-                        
-                        <Label  Grid.Column="0" Text="{Binding id_atividade}"
-                               VerticalTextAlignment="Center"
-                               HorizontalOptions="StartAndExpand" 
-                               LineBreakMode="NoWrap" 
-                                Style="{DynamicResource ListItemTextStyle}" 
-                               TextColor="Black"
-                                FontSize="16"/>
-                            <Label  Grid.Column="1" Text="{Binding id_tipo_atividade}"
-                               VerticalTextAlignment="Center"
-                               HorizontalOptions="StartAndExpand" 
-                               LineBreakMode="NoWrap" 
-                                Style="{DynamicResource ListItemTextStyle}" 
-                               TextColor="Black"
-                                FontSize="16"/>
-                            <!--<Label  Grid.Column="2" Text="{Binding nr_ordem_atividade}"
-                               VerticalTextAlignment="Center"
-                               HorizontalOptions="StartAndExpand" 
-                               LineBreakMode="NoWrap" 
-                                Style="{DynamicResource ListItemTextStyle}" 
-                               TextColor="Black"
-                                FontSize="16"/>-->
-                        <Label Grid.Column="2" Text="{Binding nm_atividade}"
-                               VerticalTextAlignment="Center"
-                               HorizontalOptions="StartAndExpand" 
-                               LineBreakMode="WordWrap" 
-                                Style="{DynamicResource ListItemTextStyle}" 
-                               TextColor="Black"
-                                FontSize="16"/>
-                        
-                        
-                            <!--<Image Grid.Column="3"  Source="check.png"
-                               HorizontalOptions="End"
-                               IsVisible="{Binding Done}" />-->
-
-                        </Grid>
 
 
-                    <!--<StackLayout Margin="20,0,0,0"
-                                 Orientation="Horizontal"
-                                 HorizontalOptions="FillAndExpand">
-                        <Label Text="{Binding id_atividade}"
-                               VerticalTextAlignment="Center"
-                               HorizontalOptions="StartAndExpand" 
-                               LineBreakMode="NoWrap" 
-                                Style="{DynamicResource ListItemTextStyle}" 
-                               TextColor="Black"
-                                FontSize="16"/>
-                        <Label Text="{Binding nr_ordem_atividade}"
-                               VerticalTextAlignment="Center"
-                               HorizontalOptions="StartAndExpand" 
-                               LineBreakMode="NoWrap" 
-                                Style="{DynamicResource ListItemTextStyle}" 
-                               TextColor="Black"
-                                FontSize="16"/>
-                        <Label Text="{Binding nm_atividade}"
-                               VerticalTextAlignment="Center"
-                               HorizontalOptions="StartAndExpand" 
-                               LineBreakMode="NoWrap" 
-                                Style="{DynamicResource ListItemTextStyle}" 
-                               TextColor="Black"
-                                FontSize="16"/>
-                    </StackLayout>-->
-                    
-                </ViewCell>
+
+
+
+            <CollectionView 
+                x:Name="ItemsListView"
+                BackgroundColor="#F9F9F9"  
+                EmptyView="Nenhum item encontrado"  
+                ItemsSource="{Binding Items}"
+                SelectionMode="None">
                 
-            </DataTemplate>
-        </ListView.ItemTemplate>
-    </ListView>
+                <!--<CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" Span="2"/>
+                </CollectionView.ItemsLayout>-->
+                
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Padding="10" x:DataType="model:AtividadesView">
+
+                            <Frame BorderColor="LightGray" CornerRadius="15" 
+                           HasShadow="True" Padding="5">
+                                
+                                
+                                 <Grid Padding="5" ColumnSpacing="0" RowSpacing="0" 
+                              Margin="2">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="auto"/>
+                                        <!--<RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>-->
+                                    </Grid.RowDefinitions>
+                                     
+                                     
+                                    <!--<Image  Grid.Row="0"   
+                                   Source="favorito.png"  
+                                   Aspect="AspectFit"   
+                                   HorizontalOptions="End" >
+                                    </Image>
+                                    <Image Grid.Row="1" Source="{Binding ImagemUrl}" Aspect="Fill"/>
+                                    <Label Grid.Row="2" Text="{Binding Titulo}" TextColor="#14B7F8"
+                                HorizontalTextAlignment="Center" VerticalOptions="CenterAndExpand"/>
+                                    <Label Grid.Row="3" Text="{Binding Preco, StringFormat='${0:N}'}"
+                              HorizontalTextAlignment="Center" VerticalOptions="CenterAndExpand" 
+                                   FontAttributes="Bold"/>-->
+
+                                    <Label  Grid.Row="0" Text="{Binding nm_atividade}" 
+                            LineBreakMode="NoWrap" 
+                                   TextColor="Black"
+                            Style="{DynamicResource ListItemTextStyle}" 
+                            FontSize="16" />
+
+                                    <Label  Grid.Row="1" Text="{Binding te_descricao}" 
+                            LineBreakMode="WordWrap" TextColor="Black"
+                            Style="{DynamicResource ListItemDetailTextStyle}"
+                            FontSize="13" />
+                                
+                                
+                                </Grid> 
+                            
+
+                            
+                            </Frame>
+                            
+                            
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer 
+                                NumberOfTapsRequired="1"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type local:AtividadesListPageViewModel}}, Path=ItemTapped}"		
+                                CommandParameter="{Binding .}">
+                                </TapGestureRecognizer>
+                            </StackLayout.GestureRecognizers>
+                                
+                        </StackLayout>
+                            
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+                
+            </CollectionView>
+        </RefreshView>
+
+
+       
     </StackLayout>
 </ContentPage>

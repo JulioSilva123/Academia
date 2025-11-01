@@ -5,26 +5,24 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using static SQLite.SQLite3;
 
 namespace jft.ToDoXamarinForm.Services
 {
-    public class AtividadesService : IDataStoreAsync<Atividades>
+    public class AtividadesService : 
+        BaseService<Atividades, AtividadesView, AtividadesService, AtividadesViewService>, 
+        IDataStoreAsync<Atividades>
     {
 
 
         public AtividadesService()
         {
-            Database = new SQLiteAsyncConnection(Constants.DatabasePath, Constants.Flags);
+            
         }
 
-        static SQLiteAsyncConnection Database;
+ 
 
-        public static readonly AsyncLazy<AtividadesService> Instance = new AsyncLazy<AtividadesService>(async () =>
-        {
-            var instance = new AtividadesService();
-            CreateTableResult result = await Database.CreateTableAsync<Atividades>();
-            return instance;
-        });
+
 
         
         public Task<bool> AddItemAsync(Atividades item)
@@ -73,5 +71,33 @@ namespace jft.ToDoXamarinForm.Services
             Database.UpdateAsync(item);
             return Task.FromResult(true);
         }
+
+      
+ 
+  
+        public override void OnIniciar()
+        {
+           // throw new NotImplementedException();
+        }
+
+
+
+
+
+        //public Task<Atividades> GetItemViewAsync(int id)
+        //{
+
+
+        //}
+
+        //public Task<List<Atividades>> GetItemsViewAsync(bool forceRefresh = false)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        //public Task<IEnumerable<Atividades>> GetItemsViewAsyncEnumerable(bool forceRefresh = false)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

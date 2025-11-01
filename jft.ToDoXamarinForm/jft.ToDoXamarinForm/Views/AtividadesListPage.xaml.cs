@@ -21,29 +21,26 @@ namespace jft.ToDoXamarinForm.Views
         }
 
         AtividadesListPageViewModel _viewModel;
+
+
         protected override async void OnAppearing()
         {
             base.OnAppearing();
             _viewModel.OnAppearing();
 
+            var _database = await AtividadesViewService.InstanceView;
+            //listView.ItemsSource = await _database.GetItemsViewAsync();
 
-            AtividadesService database = await  AtividadesService.Instance;
+            ItemsListView.ItemsSource = await _database.GetItemsViewAsync(); // _viewModel.Items;
 
-            listView.ItemsSource = null; // Clear the source
-
-            listView.ItemsSource = await database.GetItemsAsync();
         }
 
         async void OnItemAdded(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new AtividadesItemPage
             {
-                BindingContext = new Atividades()
+                BindingContext = new AtividadesView()
             });
-        }
-        async void OnGrupoItemAdded(object sender, EventArgs e)
-        {
-            //  await Navigation.PushAsync(new GrupoItemListPage());
         }
 
         async void OnListItemSelected(object sender, SelectedItemChangedEventArgs e)
@@ -52,9 +49,12 @@ namespace jft.ToDoXamarinForm.Views
             {
                 await Navigation.PushAsync(new AtividadesItemPage
                 {
-                    BindingContext = e.SelectedItem as Atividades
+                    BindingContext = e.SelectedItem as AtividadesView
                 });
             }
         }
+    
+    
+    
     }
 }
