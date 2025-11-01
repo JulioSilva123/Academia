@@ -1,5 +1,7 @@
 ﻿using jft.ToDoXamarinForm.Models;
+using jft.ToDoXamarinForm.ModelsView;
 using jft.ToDoXamarinForm.Services;
+using jft.ToDoXamarinForm.Utils;
 using jft.ToDoXamarinForm.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -29,15 +31,29 @@ namespace jft.ToDoXamarinForm.Views
         {
             //var _container = BindingContext as ListViewModel;
 
-            Itens_AtividadesService _container = await Itens_AtividadesService.Instance;
+
+          
+            var _container = await Itens_AtividadesViewService.InstanceView;
+           
+
+            //listView.BeginRefresh();
+            //if (string.IsNullOrWhiteSpace(e.NewTextValue))
+            //    listView.ItemsSource = await _container.GetItemsViewAsync();
+            //else
+            //    listView.ItemsSource = _container.GetItemsViewAsync().Result.Where(i => i.nm_item_atividade.ToLower().Contains(e.NewTextValue.ToLower()));
+            //listView.EndRefresh();
 
 
-            listView.BeginRefresh();
+            ItemsListView.BatchBegin();
             if (string.IsNullOrWhiteSpace(e.NewTextValue))
-                listView.ItemsSource = await _container.GetItemsAsync();
+                ItemsListView.ItemsSource = await _container.GetItemsViewAsync();
             else
-                listView.ItemsSource = _container.GetItemsAsync().Result.Where(i => i.nm_item_atividade.ToLower().Contains(e.NewTextValue.ToLower()));
-            listView.EndRefresh();
+                ItemsListView.ItemsSource = _container.GetItemsViewAsync().Result.Where(i => i.nm_item_atividade.ToLower().Contains(e.NewTextValue.ToLower()));
+
+            ItemsListView.BatchCommit();
+
+
+
         }
         
 
@@ -58,15 +74,21 @@ namespace jft.ToDoXamarinForm.Views
             _viewModel.OnAppearing();
 
 
-            Itens_AtividadesService database = await Itens_AtividadesService.Instance;
-            listView.ItemsSource = await database.GetItemsAsync();
+            var _database = await Itens_AtividadesViewService.InstanceView;
+            //listView.ItemsSource = await _database.GetItemsViewAsync();
+            //var _database = await AtividadesViewService.InstanceView;
+            //listView.ItemsSource = await _database.GetItemsViewAsync();
+
+            ItemsListView.ItemsSource = await _database.GetItemsViewAsync(); // _viewModel.Items;
+
+
         }
 
         async void OnItemAdded(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new Itens_AtividadesItemPage
             {
-                BindingContext = new itens_atividade()
+                BindingContext = new Itens_AtividadeView()
             });
         }
 
@@ -77,7 +99,8 @@ namespace jft.ToDoXamarinForm.Views
             {
                 await Navigation.PushAsync(new Itens_AtividadesItemPage
                 {
-                    BindingContext = e.SelectedItem as itens_atividade
+                    BindingContext = e.SelectedItem as Itens_AtividadeView,
+                    Modo = Constants.PageMode.Update
                 });
             }
         }

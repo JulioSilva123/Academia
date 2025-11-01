@@ -6,7 +6,7 @@
              mc:Ignorable="d"
              Title="{Binding Title}"
              xmlns:local="clr-namespace:jft.ToDoXamarinForm.ViewModels"
-             xmlns:model="clr-namespace:jft.ToDoXamarinForm.Models"
+             xmlns:model="clr-namespace:jft.ToDoXamarinForm.ModelsView"
              x:Class="jft.ToDoXamarinForm.Views.AtividadesListPage">
 
 

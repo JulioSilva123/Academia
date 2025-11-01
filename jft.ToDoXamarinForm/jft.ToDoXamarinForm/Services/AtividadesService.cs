@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using static SQLite.SQLite3;
+using jft.ToDoXamarinForm.ModelsView;
+
 
 namespace jft.ToDoXamarinForm.Services
 {

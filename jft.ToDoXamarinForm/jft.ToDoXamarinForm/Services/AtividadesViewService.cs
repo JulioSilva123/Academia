@@ -1,4 +1,5 @@
 ﻿using jft.ToDoXamarinForm.Models;
+using jft.ToDoXamarinForm.ModelsView;
 using jft.ToDoXamarinForm.Utils;
 using SQLite;
 using System;

@@ -12,7 +12,9 @@
                  VerticalOptions="StartAndExpand">
 
             <Label  TextColor="Black" Text="Atividade" />
-            <Entry  TextChanged="id_atividade_TextChanged" TextColor="Black" Text="{Binding id_atividade}" />
+            <Entry  TextChanged="id_atividade_TextChanged" 
+                    TextColor="Black" 
+                    Text="{Binding id_atividade}" />
 
             
             <Label  TextColor="Black" Text="Grupo" />
@@ -30,26 +32,35 @@
 
             <Label  TextColor="Black" Text="Ordem" />
             <Entry  x:Name="nr_ordem_item_atividade"  
-                    TextColor="Black" Text="{Binding nr_ordem_item_atividade}" />
+                    TextColor="Black" 
+                    Text="{Binding nr_ordem_item_atividade}" />
 
             <Label  TextColor="Black" Text="Nome" />
-            <Entry  x:Name="nm_item_atividade"  TextColor="Black" Text="{Binding nm_item_atividade}" />
+            <Entry  x:Name="nm_item_atividade"  
+                    TextColor="Black" 
+                    Text="{Binding nm_item_atividade}" />
 
-            <Label  TextColor="Black" Text="Data" />
+            
+            
+            <!--<Label  TextColor="Black" Text="Data" />
             <DatePicker x:Name="datePicker" 
                          TextColor="Black" 
                         Date="{Binding dt_item_atividade}" 
-                Format="dd/MM/yyyy"   />
+                Format="dd/MM/yyyy"   />-->
             
             
             <!--<Entry TextColor="Black" Text="{Binding dt_item_atividade}" />-->
 
-            <Label  TextColor="Black" Text="Concluído?" />
-            <Switch  IsToggled="{Binding bo_concluido}" />
+            <!--<Label  TextColor="Black" Text="Concluído?" />
+            <Switch  IsToggled="{Binding bo_concluido}" />-->
 
 
             <Label  TextColor="Black" Text="Descrição" FontSize="Medium" />
-            <Editor  x:Name="te_descricao"  TextColor="Black" Text="{Binding te_descricao, Mode=TwoWay}" AutoSize="TextChanges" FontSize="Medium" Margin="0" />
+            <Editor  x:Name="te_descricao"
+                     TextColor="Black" 
+                     Text="{Binding te_descricao}"
+                     AutoSize="TextChanges"
+                     FontSize="Medium" Margin="0" />
 
 
 

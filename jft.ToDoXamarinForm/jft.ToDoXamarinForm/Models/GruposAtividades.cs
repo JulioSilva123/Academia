@@ -13,11 +13,11 @@ namespace jft.ToDoXamarinForm.Models
     }
 
 
-    public class GruposAtividadesView
-    {
-        public int id_grupo_atividade { get; set; }
-        public string nm_grupo_atividade { get; set; }
-    }
+    //public class GruposAtividadesView
+    //{
+    //    public int id_grupo_atividade { get; set; }
+    //    public string nm_grupo_atividade { get; set; }
+    //}
 
 
 }

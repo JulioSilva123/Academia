@@ -1,4 +1,5 @@
 ﻿using jft.ToDoXamarinForm.Models;
+using jft.ToDoXamarinForm.ModelsView;
 using jft.ToDoXamarinForm.Utils;
 using System;
 using System.Collections.Generic;
@@ -10,8 +11,8 @@ namespace jft.ToDoXamarinForm.ViewModels
 {
 
 
-    [QueryProperty(nameof(id_tipo_atividade), nameof(id_tipo_atividade))]
-    public class TiposAtividadesItemPageViewModel : BaseViewModel<TiposAtividades>
+    [QueryProperty(nameof(ItemId), nameof(ItemId))]
+    public class TiposAtividadesItemPageViewModel : BaseItemViewModel<TiposAtividades, TiposAtividadesView>
     {
 
         public TiposAtividadesItemPageViewModel()
@@ -25,12 +26,19 @@ namespace jft.ToDoXamarinForm.ViewModels
         {
             get
             {
+
+                if (this.ItemId != null)
+                {
+                    _id_tipo_atividade = int.Parse(this.ItemId);
+                }
+
                 return _id_tipo_atividade;
+ 
             }
             set
             {
                 _id_tipo_atividade = value;
-                this.LoadItemId(value);
+                this.LoadItemId(value.ToString());
             }
         }
 
@@ -44,11 +52,11 @@ namespace jft.ToDoXamarinForm.ViewModels
          
 
 
-        public async void LoadItemId(int itemId)
+        public override async void LoadItemId(string itemId)
         {
             try
             {
-                var item = await DataStore.GetItemAsync(itemId);
+                var item = await DataStore.GetItemAsync(int.Parse(itemId));
                 this._id_tipo_atividade = item.id_tipo_atividade;
                 this._nm_tipo_atividade = item.nm_tipo_atividade;
 
@@ -59,5 +67,6 @@ namespace jft.ToDoXamarinForm.ViewModels
             }
         }
 
+        
     }
 }

@@ -14,11 +14,11 @@ namespace jft.ToDoXamarinForm.Models
 
     }
 
-    public class TiposAtividadesView
-    {
-        public int id_tipo_atividade { get; set; }
-        public string nm_tipo_atividade { get; set; }
+    //public class TiposAtividadesView
+    //{
+    //    public int id_tipo_atividade { get; set; }
+    //    public string nm_tipo_atividade { get; set; }
 
-    }
+    //}
 
 }

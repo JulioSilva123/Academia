@@ -29,7 +29,8 @@
         <ShellContent Title="Grupos"  Icon="icon.png"  Route="GruposAtividadesListPage" ContentTemplate="{DataTemplate local:GruposAtividadesListPage}"  />
         <ShellContent Title="Tipos" Icon="icon.png"   Route="TiposAtividadesListPage"  ContentTemplate="{DataTemplate local:TiposAtividadesListPage}"  />
         <ShellContent Title="Atividades" Icon="icon.png"  Route="AtividadesListPage"  ContentTemplate="{DataTemplate local:AtividadesListPage}"  />        
-        <ShellContent Title="Diário" Icon="icon.png"   Route="Itens_AtividadesListPage"  ContentTemplate="{DataTemplate local:Itens_AtividadesListPage}"  />
+        <ShellContent Title="Plano" Icon="icon.png"   Route="Itens_AtividadesListPage"  ContentTemplate="{DataTemplate local:Itens_AtividadesListPage}"  />
+        <ShellContent Title="Diário" Icon="icon.png"   Route="DiariaAtividadesListPage"  ContentTemplate="{DataTemplate local:DiariaAtividadesListPage}"  />
     </TabBar>
 
     <!--

@@ -1,4 +1,5 @@
 ﻿using jft.ToDoXamarinForm.Models;
+using jft.ToDoXamarinForm.ModelsView;
 using jft.ToDoXamarinForm.Utils;
 using System;
 using System.Collections.Generic;
@@ -10,38 +11,35 @@ namespace jft.ToDoXamarinForm.ViewModels
 {
 
 
-    [QueryProperty(nameof(id_grupo_atividade), nameof(id_grupo_atividade))]
-    public class GruposAtividadesItemPageViewModel : BaseViewModel<GruposAtividades>
+    [QueryProperty(nameof(ItemId), nameof(ItemId))]
+    public class GruposAtividadesItemPageViewModel : BaseItemViewModel<GruposAtividades, GruposAtividadesView>
     {
 
         public GruposAtividadesItemPageViewModel()
         {
             Title = "Grupo de Atividade";
-            //Items = new ObservableCollection<Item>();
-            //LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
-
-            //ItemTapped = new Command<Item>(OnItemSelected);
-
-            //AddItemCommand = new Command(OnAddItem);
+           
         }
 
-
-
-
-        //private string description;
-
+ 
 
         private int _id_grupo_atividade;
         public int id_grupo_atividade
         {
             get
             {
+                if (this.ItemId != null)
+                {
+                    _id_grupo_atividade = int.Parse(this.ItemId);
+                }
+
                 return _id_grupo_atividade;
+
             }
             set
             {
                 _id_grupo_atividade = value;
-                this.LoadItemId(value);
+                this.LoadItemId(value.ToString());
             }
         }
 
@@ -53,22 +51,17 @@ namespace jft.ToDoXamarinForm.ViewModels
             set => SetProperty(ref _nm_grupo_atividade, value);
         }
 
-        //public string Description
-        //{
-        //    get => description;
-        //    set => SetProperty(ref description, value);
-        //}
+        
 
 
-
-        public async void LoadItemId(int itemId)
+        public override async void LoadItemId(string itemId)
         {
             try
             {
-                var item = await DataStore.GetItemAsync(itemId);
+                var item = await DataStore.GetItemAsync(int.Parse(itemId));
                 this._id_grupo_atividade = item.id_grupo_atividade;
-                this._nm_grupo_atividade = item.nm_grupo_atividade;
-                //Description = item.Description;
+                this.nm_grupo_atividade = item.nm_grupo_atividade;
+           
             }
             catch (Exception)
             {
@@ -76,8 +69,6 @@ namespace jft.ToDoXamarinForm.ViewModels
             }
         }
 
-
-
-
+      
     }
 }

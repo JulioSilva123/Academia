@@ -1,4 +1,5 @@
 ﻿using jft.ToDoXamarinForm.Models;
+using jft.ToDoXamarinForm.ModelsView;
 using jft.ToDoXamarinForm.Utils;
 using jft.ToDoXamarinForm.Views;
 using System;
@@ -13,7 +14,8 @@ namespace jft.ToDoXamarinForm.ViewModels
 {
 
     
-    public class GruposAtividadesListPageViewModel : BaseViewModel<GruposAtividades>
+    public class GruposAtividadesListPageViewModel :
+        BaseListViewModel<GruposAtividades, GruposAtividadesView>
     {
 
 
@@ -22,84 +24,31 @@ namespace jft.ToDoXamarinForm.ViewModels
         public GruposAtividadesListPageViewModel()
         {
             Title = "Grupos de Atividades";
-            //Items = new ObservableCollection<Item>();
-            //LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
-
-            ItemTapped = new Command<GruposAtividades>(OnItemSelected);
-
-            //AddItemCommand = new Command(OnAddItem);
+            
         }
 
-
-        private int _id_grupo_atividade;
-        private string nm_grupo_atividade;
-        //private string description;
-        public int id_grupo_atividade { get; set; }
-
-
-        private GruposAtividades _selectedItem;
-
-        //public ObservableCollection<Item> Items { get; }
-        //public Command LoadItemsCommand { get; }
-        //public Command AddItemCommand { get; }
-        public Command<GruposAtividades> ItemTapped { get; }
-
-        //async Task ExecuteLoadItemsCommand()
-        //{
-        //    IsBusy = true;
-
-        //    try
-        //    {
-        //        Items.Clear();
-        //        var items = await DataStore.GetItemsAsync(true);
-        //        foreach (var item in items)
-        //        {
-        //            Items.Add(item);
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Debug.WriteLine(ex);
-        //    }
-        //    finally
-        //    {
-        //        IsBusy = false;
-        //    }
-        //}
 
         public void OnAppearing()
         {
-            IsBusy = true;
-            SelectedItem = null;
+            base.OnAppearing();
         }
 
-        public GruposAtividades SelectedItem
+        public async override void OnAddItem(object obj)
         {
-            get => _selectedItem;
-            set
-            {
-                SetProperty(ref _selectedItem, value);
-                OnItemSelected(value);
-            }
+            await Shell.Current.GoToAsync(nameof(GruposAtividadesItemPage));
         }
 
-        //private async void OnAddItem(object obj)
-        //{
-        //    await Shell.Current.GoToAsync(nameof(NewItemPage));
-        //}
-
-
-
-        async void OnItemSelected(GruposAtividades item)
+        public async override void OnItemSelected(GruposAtividadesView item)
         {
             if (item == null)
                 return;
 
-            //return;
+            await Shell.Current.GoToAsync($"{nameof(GruposAtividadesItemPage)}?{nameof(GruposAtividadesView.id_grupo_atividade)}={item.id_grupo_atividade}");
 
-            await Shell.Current.GoToAsync($"{nameof(GruposAtividadesItemPage)}?{nameof(GruposAtividadesItemPageViewModel.id_grupo_atividade)}={item.id_grupo_atividade}");
+            return;
         }
 
+ 
 
 
     }

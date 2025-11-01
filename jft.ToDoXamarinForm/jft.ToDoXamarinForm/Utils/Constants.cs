@@ -25,5 +25,19 @@ namespace jft.ToDoXamarinForm.Utils
                 return Path.Combine(basePath, DatabaseFilename);
             }
         }
+
+
+
+        public enum PageMode
+        {
+            Insert,
+            Update,
+            Delete,
+            View
+        }
+
+
+
+
     }
 }

@@ -14,7 +14,27 @@ namespace jft.ToDoXamarinForm
             InitializeComponent();
             SetAppTheme();
 
+
+
             DependencyService.Register<AtividadesService>();
+            DependencyService.Register<AtividadesViewService>();
+
+            DependencyService.Register<DiariaAtividadesService>();
+            DependencyService.Register<DiariaAtividadesViewService>();
+
+            DependencyService.Register<GruposAtividadesService>();
+            DependencyService.Register<GruposAtividadesViewService>();
+
+            DependencyService.Register<Itens_AtividadesService>();
+            DependencyService.Register<Itens_AtividadesViewService>();
+
+
+            DependencyService.Register<TiposAtividadesService>();
+            DependencyService.Register<TiposAtividadesViewService>();
+
+
+            //DependencyService.Register<AtividadesService>();
+            //DependencyService.Register<AtividadesService>();
 
 
             MainPage = new AppShell();

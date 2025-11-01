@@ -1,12 +1,15 @@
 ﻿using jft.ToDoXamarinForm.Models;
+using jft.ToDoXamarinForm.ModelsView;
 using jft.ToDoXamarinForm.Utils;
+using jft.ToDoXamarinForm.Views;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Xamarin.Forms;
 
 namespace jft.ToDoXamarinForm.ViewModels
 {
-    public class Itens_AtividadesListPageViewModel : BaseViewModel<itens_atividade>
+    public class Itens_AtividadesListPageViewModel : BaseListViewModel<itens_atividade, Itens_AtividadeView>
     {
 
 
@@ -16,36 +19,29 @@ namespace jft.ToDoXamarinForm.ViewModels
            
         }
 
-        private itens_atividade _selectedItem;
-
-        
 
         public void OnAppearing()
         {
-            IsBusy = true;
-            SelectedItem = null;
+            base.OnAppearing();
         }
 
-        public itens_atividade SelectedItem
+        public async override void OnAddItem(object obj)
         {
-            get => _selectedItem;
-            set
-            {
-                SetProperty(ref _selectedItem, value);
-                OnItemSelected(value);
-            }
+            await Shell.Current.GoToAsync(nameof(Itens_AtividadesItemPage));
         }
- 
-        async void OnItemSelected(itens_atividade item)
+
+        public async override void OnItemSelected(Itens_AtividadeView item)
         {
             if (item == null)
                 return;
 
-            return;
+            await Shell.Current.GoToAsync($"{nameof(Itens_AtividadesItemPage)}?{nameof(Itens_AtividadesItemPageViewModel.ItemId)}={item.id_item_atividade}");
 
-            //// This will push the ItemDetailPage onto the navigation stack
-            //  await Shell.Current.GoToAsync($"{nameof(GruposAtividadesItemPage)}?{nameof(ItemDetailViewModel.ItemId)}={item.Id}");
+            return;
         }
+
+ 
+  
 
 
     }

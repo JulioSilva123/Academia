@@ -17,9 +17,22 @@ namespace jft.ToDoXamarinForm
         {
             InitializeComponent();
             Routing.RegisterRoute(nameof(GruposAtividadesListPage), typeof(GruposAtividadesListPage));
+
             Routing.RegisterRoute(nameof(AtividadesListPage), typeof(AtividadesListPage));
+            Routing.RegisterRoute(nameof(AtividadesItemPage), typeof(AtividadesItemPage));
+
+
             Routing.RegisterRoute(nameof(TiposAtividadesListPage), typeof(TiposAtividadesListPage));
+            
+            Routing.RegisterRoute(nameof(Itens_AtividadesItemPage), typeof(Itens_AtividadesItemPage));
             Routing.RegisterRoute(nameof(Itens_AtividadesListPage), typeof(Itens_AtividadesListPage));
+
+
+
+
+            Routing.RegisterRoute(nameof(DiariaAtividadesListPage), typeof(DiariaAtividadesListPage));
+
+            
 
         }
     }

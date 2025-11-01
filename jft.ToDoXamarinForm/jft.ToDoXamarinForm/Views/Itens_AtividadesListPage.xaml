@@ -1,6 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:jft.ToDoXamarinForm.ViewModels"
+             xmlns:model="clr-namespace:jft.ToDoXamarinForm.ModelsView"
              x:Class="jft.ToDoXamarinForm.Views.Itens_AtividadesListPage"
              Title="{Binding Title}">
 
@@ -25,31 +27,162 @@
     </ContentPage.ToolbarItems>
 
 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <StackLayout  >
         
         
         <SearchBar x:Name="CountriesSearchBar"  
              TextChanged="Handle_SearchButtonPressed" />
-       
-        
-        
-        
-        <Grid  Padding="5">
+
+
+        <RefreshView x:DataType="local:Itens_AtividadesListPageViewModel" 
+                     Command="{Binding LoadItemsCommand}" 
+                     IsRefreshing="{Binding IsBusy, Mode=TwoWay}" RefreshColor="#4E0A0A"  >
+
+
+           
+            <CollectionView 
+                x:Name="ItemsListView"
+                BackgroundColor="#384889"  
+                EmptyView="Nenhum item encontrado"  
+                ItemsSource="{Binding Items}"
+                SelectionMode="None">
+ 
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Padding="10" x:DataType="model:Itens_AtividadeView">
+
+                            <Frame BorderColor="LightGray" CornerRadius="15" 
+                           HasShadow="True" Padding="5" BackgroundColor="#CADAFD">
+
+
+                                <Grid Padding="5" ColumnSpacing="0" RowSpacing="0" 
+                              Margin="2">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="5*" />
+                                        <ColumnDefinition Width="1*" />
+                                        <!--<ColumnDefinition Width="2*" />
+                                        <ColumnDefinition Width="1*" />-->
+                                    </Grid.ColumnDefinitions>
+
+                                    <!--<Image  Grid.Row="0"   
+                                   Source="favorito.png"  
+                                   Aspect="AspectFit"   
+                                   HorizontalOptions="End" >
+                                    </Image>
+                                    <Image Grid.Row="1" Source="{Binding ImagemUrl}" Aspect="Fill"/>
+                                    <Label Grid.Row="2" Text="{Binding Titulo}" TextColor="#14B7F8"
+                                HorizontalTextAlignment="Center" VerticalOptions="CenterAndExpand"/>
+                                    <Label Grid.Row="3" Text="{Binding Preco, StringFormat='${0:N}'}"
+                              HorizontalTextAlignment="Center" VerticalOptions="CenterAndExpand" 
+                                   FontAttributes="Bold"/>-->
+
+                                    <Label  Grid.Column="0"  Grid.Row="0" Text="{Binding nm_item_atividade}" 
+                            LineBreakMode="NoWrap" 
+                                   TextColor="#FFFFFF" TextTransform="Uppercase"
+                            Style="{DynamicResource ListItemTextStyle}" 
+                            FontSize="16" BackgroundColor="#010D4E" CharacterSpacing="1" />
+
+
+                                    <Label  Grid.Column="0" Grid.Row="1" Text="{Binding GruposAtividades.nm_grupo_atividade}"
+                               VerticalTextAlignment="Center"
+                               HorizontalOptions="StartAndExpand" 
+                               LineBreakMode="WordWrap" 
+                                             TextColor="Black"
+                                Style="{DynamicResource ListItemTextStyle}"
+                                FontSize="16" />
+
+
+                                    <!--<Label  Grid.Column="1" Grid.Row="2" Text="{Binding Atividades.GruposAtividades.nm_grupo_atividade}"
+                               VerticalTextAlignment="Center"
+                               HorizontalOptions="StartAndExpand" 
+                               LineBreakMode="WordWrap" 
+                                             TextColor="Black"
+                                Style="{DynamicResource ListItemTextStyle}"
+                                FontSize="16" />-->
+
+
+
+                                    <Label  Grid.Column="0"  Grid.Row="2" Text="{Binding te_descricao}" 
+                            LineBreakMode="WordWrap" TextColor="Black"
+                            Style="{DynamicResource ListItemDetailTextStyle}"
+                            FontSize="13" />
+
+                                    <Label  Grid.Column="0"  Grid.Row="3" Text="{Binding dt_item_atividade, StringFormat='{0:dd/MM/yyyy}'}"
+                               VerticalTextAlignment="Center"
+                               HorizontalOptions="StartAndExpand" 
+                               LineBreakMode="WordWrap"  
+                                Style="{DynamicResource ListItemTextStyle}" 
+                               TextColor="Black"
+                                FontSize="16"/>
+
+
+                                    <Image  Grid.Column="1" 
+                                    Source="check.png"
+                               HorizontalOptions="Center"
+                               IsVisible="{Binding bo_concluido}" />
+
+
+                                </Grid>
+
+
+
+                            </Frame>
+
+
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer 
+                                NumberOfTapsRequired="1"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type local:Itens_AtividadesListPageViewModel}}, Path=ItemTapped}"		
+                                CommandParameter="{Binding .}">
+                                </TapGestureRecognizer>
+                            </StackLayout.GestureRecognizers>
+
+                        </StackLayout>
+
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+            </CollectionView>
+        </RefreshView>
+
+
+        <!--<Grid  Padding="5">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="5*" />
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="1*" />
             </Grid.ColumnDefinitions>
-            <Label Text="Tipo" TextColor="Black" FontAttributes="Bold" Grid.Column="0" />
-            <Label Text="Data" TextColor="Black" FontAttributes="Bold" Grid.Column="1" />
-            <Label Text="OK?" TextColor="Black" FontAttributes="Bold" Grid.Column="2" />
+            <Label Text="Grupo" TextColor="Black" FontAttributes="Bold" Grid.Column="0" />
+            <Label Text="Nome" TextColor="Black" FontAttributes="Bold" Grid.Column="1" />
+            <Label Text="Data" TextColor="Black" FontAttributes="Bold" Grid.Column="2" />
+            <Label Text="OK?" TextColor="Black" FontAttributes="Bold" Grid.Column="3" />
         </Grid>
 
         <ListView x:Name="listView"
               Margin="10"
-              ItemSelected="OnListItemSelected">
+              ItemSelected="OnListItemSelected"  RefreshControlColor="#2A0D0D" SeparatorColor="#000000">
 
             <ListView.ItemTemplate>
                 <DataTemplate>
@@ -60,13 +193,23 @@
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*"   />
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="5*" />
+                                <ColumnDefinition Width="2*" />
+                                <ColumnDefinition Width="1*" />
                             </Grid.ColumnDefinitions>
 
+                            <Label Grid.Column="0" Text="{Binding GruposAtividades.id_grupo_atividade}"
+                               VerticalTextAlignment="Center"
+                               HorizontalOptions="StartAndExpand" 
+                               LineBreakMode="WordWrap" 
+                                Style="{DynamicResource ListItemTextStyle}" 
+                               TextColor="Black"
+                                FontSize="16"/>
+                             
 
-                            <Label Grid.Column="0" Text="{Binding nm_item_atividade}"
+
+                            <Label Grid.Column="1" Text="{Binding nm_item_atividade}"
                                VerticalTextAlignment="Center"
                                HorizontalOptions="StartAndExpand" 
                                LineBreakMode="WordWrap" 
@@ -74,7 +217,7 @@
                                TextColor="Black"
                                 FontSize="16"/>
 
-                            <Label Grid.Column="1" Text="{Binding dt_item_atividade, StringFormat='{0:dd/MM/yyyy}'}"
+                            <Label Grid.Column="2" Text="{Binding dt_item_atividade, StringFormat='{0:dd/MM/yyyy}'}"
                                VerticalTextAlignment="Center"
                                HorizontalOptions="StartAndExpand" 
                                LineBreakMode="WordWrap"  
@@ -83,7 +226,7 @@
                                 FontSize="16"/>
 
 
-                            <Image  Grid.Column="2" 
+                            <Image  Grid.Column="3" 
                                     Source="check.png"
                                HorizontalOptions="Center"
                                IsVisible="{Binding bo_concluido}" />
@@ -95,7 +238,12 @@
 
                 </DataTemplate>
             </ListView.ItemTemplate>
-        </ListView>
+        </ListView>-->
+   
+    
+    
+    
+    
     </StackLayout>
 
 
